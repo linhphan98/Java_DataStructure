@@ -1,0 +1,13 @@
+import java.util.*;
+public class CoutingPossiblePaths {
+	private int numberOfVertices;
+	private LinkedList<Integer> adj[];
+
+	CoutingPossiblePaths(int v){
+		numberOfVertices = v;
+		adj = new LinkedList[v];
+		for(int i = 0; i < v; i++) {
+			adj[i] = new LinkedList<>();
+		}
+	}
+}

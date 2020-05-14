@@ -1,0 +1,7 @@
+import java.util.*;
+public class CoutingPossiblePaths {
+	@SuppressWarnings("unchecked");
+	private int numberOfvertices;
+	private LinkedList<Integer> adj[];
+	
+}

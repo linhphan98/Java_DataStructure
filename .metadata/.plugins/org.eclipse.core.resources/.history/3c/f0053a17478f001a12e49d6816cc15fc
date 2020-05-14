@@ -1,0 +1,77 @@
+import java.util.*;
+import java.lang.*;
+
+public class ClosestElement {
+	Node root;
+	int size = 0;
+	TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+	static class Node{
+		int data; 
+		Node right;
+		Node left;
+		
+		Node(int x){
+			data = x;
+			right = null;
+			left = null;
+		}
+	}
+	
+	void insert(int data) {
+		root = insertRecursion(root, data);
+	}
+	
+	Node insertRecursion(Node root, int data) {
+		if(root == null) {
+			root = new Node(data);
+			return root;
+		}
+		if(data < root.data) {
+			root.left = insertRecursion(root.left, data);
+		}else if(data > root.data) {
+			root.right = insertRecursion(root.right, data);
+		}
+		
+		return root;
+	}
+	
+	void findingElement(Node root, int k) {
+		if(root.data == k) {
+			System.out.println(root.data);
+			return;
+		}
+		if(k < root.data) {
+			map.put(Math.abs(root.data - k), root.data);
+			if(root.left != null) {
+				findingElement(root.left, k);
+			}
+		}
+		if(k > root.data) {
+			map.put(Math.abs(root.data - k), root.data);
+			if(root.right != null) {
+				findingElement(root.right, k);
+			}
+		}
+	}
+	
+	public static void main(String args[]) {
+		ClosestElement obj = new ClosestElement();
+		
+		obj.insert(9);
+		obj.insert(4);
+		obj.insert(17);
+		obj.insert(3);
+		obj.insert(6);
+		obj.insert(5);
+		obj.insert(7);
+		obj.insert(22);
+		obj.insert(20);
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter k: ");
+		int k = input.nextInt();
+		obj.findingElement(obj.root, k);
+		
+		System.out.print(obj.map.get(obj.map.firstKey()));
+	}
+}

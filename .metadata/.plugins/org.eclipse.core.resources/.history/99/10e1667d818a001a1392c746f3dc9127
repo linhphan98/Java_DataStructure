@@ -1,0 +1,34 @@
+import java.util.*;
+public class DepthFirstSearch {
+	private int numOfVertices; 
+	private ArrayList<LinkedList<Integer>> listOfVertices;
+	
+	DepthFirstSearch(int vertices){
+		numOfVertices = vertices;
+		listOfVertices = new ArrayList<LinkedList<Integer>>();
+		for(int i = 0; i < vertices; i++) {
+			listOfVertices.add(new LinkedList<Integer>());
+		}
+	}
+	
+	void addEdge(int src, int dest) {
+		(listOfVertices.get(src)).add(0,dest);
+	}
+	
+	void DFSrecursive(int v, boolean visited[]) {
+		visited[v] = true;
+		System.out.print(v + " ");
+		
+		Iterator<Integer> i = (listOfVertices.get(v)).listIterator();
+		while(i.hasNext()) {
+			int n = i.next();
+			if(!visited[n]) {
+				DFSrecursive(n, visited);
+			}
+		}
+	}
+	void DFS(int src) {
+		boolean visited[] = new boolean[numOfVertices];
+		DFSrecursive(src,visited);
+	}
+}

@@ -1,0 +1,31 @@
+import java.util.LinkedList;
+import java.util.Queue;
+public class SmallestNumberOf9and0 {
+	public static void main(String args[]) {
+		Queue<Integer> queue = new LinkedList<>(); 
+		int answer = 0;
+		int i = 9;
+		int count = 0;
+		queue.add(i);
+		while(i < 1000000) {
+			queue.add(i *= 10);
+			queue.add(i += 9);
+			if(count == 10) {
+				for(int x = 0; x < count; x++) {
+					int value = queue.poll();
+					System.out.println(value);
+					if(value%5 == 0) {
+						answer = value;
+						break;
+					}
+				}
+			}else {
+				count++;
+			}
+			if(answer > 0) {
+				break;
+			}
+		}
+		System.out.println("Answer: " + answer);
+	}
+}

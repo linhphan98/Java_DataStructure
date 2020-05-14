@@ -1,0 +1,51 @@
+import java.util.*;
+public class AdjacencyList {
+	private Map<Integer, ArrayList<Integer>> adjListMap;
+	public AdjacencyList(int vertices) {
+		adjListMap = new HashMap<Integer, ArrayList<Integer>>();
+		for(int i = 1; i <= vertices; i++) {
+			ArrayList<Integer> neighbors = new ArrayList<Integer>();
+			adjListMap.put(i, neighbors);
+		}
+	}
+	
+	public void addEdge(int vertice, int neighbor) {
+		if(vertice > adjListMap.size() || neighbor > adjListMap.size()) {
+			return;
+		}
+		(adjListMap.get(vertice)).add(neighbor); // return the arrayList with the key then add the neighbor into the list
+		(adjListMap.get(neighbor)).add(vertice); // both way
+	}
+	
+	public ArrayList<Integer> getNeighbors(int value){
+		if (value > adjListMap.size()) {
+			return null;
+		}
+		return adjListMap.get(value); 
+	}
+	
+	public static void main(String args[]) {
+		int count = 1, source, destination;
+		System.out.println("Enter the number of vertices and edges"); 
+		Scanner input = new Scanner(System.in);
+		int vertices = input.nextInt();
+		int edges = input.nextInt();
+		AdjacencyList list = new AdjacencyList(vertices); 
+		System.out.println("Enter the path as <source> <destination>");
+		while(count <= edges) {
+			source = input.nextInt();
+			destination = input.nextInt();
+			list.addEdge(source, destination);
+			count++;
+		}
+		System.out.println("The given adjacency list for the graph");
+		for(int i = 1; i <= vertices; i++) {
+			System.out.print(i + ": ");
+			ArrayList<Integer> edgeList = list.getNeighbors(i);
+			for(int j = 0; j < edgeList.size(); j++) {
+				System.out.print(edgeList.get(j) + " -> ");
+			}
+			System.out.println();
+		}
+	}
+}

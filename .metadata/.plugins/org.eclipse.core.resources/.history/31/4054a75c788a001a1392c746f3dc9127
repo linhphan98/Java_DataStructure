@@ -1,0 +1,19 @@
+import java.util.*;
+class Graph{
+	class Edge{
+		int vertice, weight;
+		public Edge(int v, int w) {
+			this.vertice = v;
+			this.weight = w;
+		}
+	}
+	List<Edge> graph[];
+	public Graph(int vertices) {
+		
+	}
+}
+public class AdjacencyList {
+	
+	public static void main(String args[]) {
+	}
+}

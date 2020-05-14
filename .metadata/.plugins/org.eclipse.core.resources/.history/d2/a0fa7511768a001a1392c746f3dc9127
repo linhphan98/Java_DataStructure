@@ -1,0 +1,26 @@
+import java.util.*;
+public class AdjacencyList {
+	private Map<Integer, ArrayList<Integer>> adjListMap;
+	public AdjacencyList(int vertices) {
+		adjListMap = new HashMap<Integer, ArrayList<Integer>>();
+		for(int i = 1; i <= vertices; i++) {
+			ArrayList<Integer> neighbors = new ArrayList<Integer>();
+			adjListMap.put(i, neighbors);
+		}
+	}
+	
+	public void addEdge(int vertice, int neighbor) {
+		if(vertice > adjListMap.size() || neighbor > adjListMap.size()) {
+			return;
+		}
+		(adjListMap.get(vertice)).add(neighbor); // return the arrayList with the key then add the neighbor into the list
+		(adjListMap.get(neighbor)).add(vertice); // both way
+	}
+	
+	public ArrayList<Integer> getNeighbors(int vertice){
+		if (vertice > adjListMap.size()) {
+			return null;
+		}
+		return adjListMap.get(vertice) 
+	}
+}

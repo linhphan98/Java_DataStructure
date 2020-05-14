@@ -1,0 +1,10 @@
+import java.util.*;
+public class DepthFirstSearch {
+	private int numOfVertices; 
+	private ArrayList<LinkedList<Integer>> listOfVertices;
+	
+	DepthFirstSearch(int vertices){
+		numOfVertices = vertices;
+		listOfvertices = new ArrayList();
+	}
+}

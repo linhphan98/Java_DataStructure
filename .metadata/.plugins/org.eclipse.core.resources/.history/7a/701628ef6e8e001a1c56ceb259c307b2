@@ -1,0 +1,49 @@
+import java.util.*;
+public class CoutingPossiblePaths {
+	private int numberOfVertices;
+	private LinkedList<Integer> adj[];
+
+	CoutingPossiblePaths(int v){
+		numberOfVertices = v;
+		adj = new LinkedList[v];
+		for(int i = 0; i < v; i++) {
+			adj[i] = new LinkedList<>();
+		}
+	}
+	
+	void addEdge(int src, int dest) {
+		adj[src].add(dest);
+	}
+	
+	int countPathUtils(int src, int dest, int count) {
+		if(src == dest) count++; 
+		else {
+			Iterator<Integer> i = adj[src].listIterator();
+			while(i.hasNext()) {
+				int n = i.next();
+				count = countPathUtils(n, dest, count);
+			}
+		}
+		return count;
+	}
+	
+	int countPath(int src, int dest) {
+		int pathCount = 0;
+		pathCount = countPathUtils(src, dest, pathCount);
+		return pathCount;
+	}
+	
+	public static void main(String args[]) {
+		CoutingPossiblePaths g = new CoutingPossiblePaths(5);
+		g.addEdge(0, 1); 
+        g.addEdge(0, 2); 
+        g.addEdge(0, 3); 
+        g.addEdge(1, 3); 
+        g.addEdge(2, 3); 
+        g.addEdge(1, 4); 
+        g.addEdge(2, 4); 
+        
+        int s = 0, d = 3; 
+        System.out.println(g.countPath(s, d)); 
+	}
+}

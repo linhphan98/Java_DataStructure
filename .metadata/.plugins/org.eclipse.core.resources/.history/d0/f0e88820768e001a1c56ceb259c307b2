@@ -1,0 +1,14 @@
+import java.util.*;
+public class GetAllPath {
+	void printPath(Vector<Integer> path) {
+		
+	}
+	
+	int hasNotVisited(int x, Vector<Integer> path) {
+		int size = path.size();
+		for(int i = 0; i < size; i++) {
+			if(path.elementAt(i) == x) return 0;
+		}
+		return 1;
+	}
+}

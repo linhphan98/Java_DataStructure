@@ -1,0 +1,13 @@
+import java.util.*;
+public class DepthFirstSearch {
+	private int numOfVertices; 
+	private ArrayList<LinkedList<Integer>> listOfVertices;
+	
+	DepthFirstSearch(int vertices){
+		numOfVertices = vertices;
+		listOfVertices = new ArrayList();
+		for(int i = 0; i < vertices; i++) {
+			listOfVertices.add(new LinkedList());
+		}
+	}
+}

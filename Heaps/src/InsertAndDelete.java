@@ -1,0 +1,102 @@
+import java.util.*;
+
+public class InsertAndDelete<T extends Comparable<T>> {
+	private ArrayList<T> items;
+	public InsertAndDelete() {
+		items = new ArrayList<T>();
+	}
+	
+	private void siftUp() {
+		int lastValue = items.size() - 1;
+		while(lastValue > 0) {
+			int parentValue = (lastValue - 1)/2; // does not matter - 1 or 2 when sifting up 
+			// because the value will round down anyways to the parent node
+			T current = items.get(lastValue);
+			T parent = items.get(parentValue);
+			if(current.compareTo(parent) > 0) {
+				// cur < par = -1; == : 0; > : 1
+				items.set(parentValue, current);
+				items.set(lastValue, parent);
+				
+				// move up 
+				lastValue = parentValue;
+			}else {
+				break;
+			}
+		}
+	}
+	
+	public void insert(T item) {
+		items.add(item);
+		siftUp();
+	}
+	
+	private void siftDown() {
+		int indexValue = 0; 
+		int leftChild = 1; 
+		while(leftChild < items.size()) {
+			int max = leftChild, rightChild = leftChild + 1;
+			if(rightChild < items.size()) { // if there is right child
+				if(items.get(rightChild).compareTo(items.get(leftChild)) > 0){
+					// right > left -> max = rightChild
+					max = rightChild;
+				}
+			}
+			if(items.get(indexValue).compareTo(items.get(max)) < 0) {
+				// if the curr < max then swap
+				T temp = items.get(indexValue);
+				items.set(indexValue, items.get(max));
+				items.set(max, temp);
+				indexValue = max;
+				leftChild = 2*indexValue + 1;
+			}else {
+				break;
+			}
+		}
+	}
+	
+	public T delete() throws NoSuchElementException{
+		if(items.size() == 0) {
+			throw new NoSuchElementException();
+		}
+		if(items.size() == 1) {
+			return items.remove(0);
+		}
+		T topValue = items.get(0);
+		items.set(0, items.remove(items.size() - 1)); // remove and return the element
+		siftDown();
+		return topValue;
+	}
+	
+	public int size() {
+		return items.size();
+	}
+	
+	public boolean isEmpty() {
+		return items.isEmpty();
+	}
+	
+	@Override
+	public String toString() {
+		return items.toString();
+	}
+	
+	public static void main(String args[]) {
+		InsertAndDelete<Integer> heap = new InsertAndDelete<Integer>();
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter the next int, 'done' to stop: ");
+		String line = input.next();
+		
+		while(!line.equals("done")) {
+			heap.insert(Integer.parseInt(line));
+			System.out.println(heap);
+			System.out.print("Enter the next int, 'done' to stop: ");
+			line = input.next();
+		}
+		
+		while(!heap.isEmpty()) {
+			int max = heap.delete();
+			System.out.println(max + " " + heap);
+		}
+	}
+}

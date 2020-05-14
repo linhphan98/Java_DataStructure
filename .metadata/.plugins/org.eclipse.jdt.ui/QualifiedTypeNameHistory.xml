@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.classfile.Node"/>
+    <fullyQualifiedTypeName name="Array"/>
+    <fullyQualifiedTypeName name="LinkedList"/>
+    <fullyQualifiedTypeName name="StockSpanProblem"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

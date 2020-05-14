@@ -1,0 +1,14 @@
+import java.util.*;
+
+class Graph {
+	private int numOfVertices; 
+	private LinkedList<Integer> adj; // adjacency list
+	
+	Graph(int vertices){
+		numOfVertices = vertices; 
+		adj = new LinkedList<Integer>;
+	}
+}
+public class BreadthFirstSearch {
+	
+}

@@ -1,0 +1,44 @@
+import java.util.*;
+public class GetAllPath {
+	void printPath(Vector<Integer> path) {
+		int size = path.size();
+		for(int i = 0; i < size; i++) {
+			System.out.print(path.elementAt(i) + " ");
+		System.out.println();
+		}
+	}
+	
+	Boolean hasNotVisited(int x, Vector<Integer> path) {
+		int size = path.size();
+		for(int i = 0; i < size; i++) {
+			if(path.elementAt(i) == x) return false;
+		}
+		return true;
+	}
+	
+	void findPaths(Vector<Vector<Integer>> graph, int src, int dest, int size) {
+		Queue<Vector<Integer> > queue = null;
+		
+		Vector<Integer> path = null;
+		path.add(src);
+		queue.add(path);
+		
+		while(!queue.isEmpty()) {
+			path = queue.peek();
+			queue.poll();
+			int last = path.elementAt(path.size() - 1);
+			
+			if(last == dest) {
+				printPath(path);
+			}
+			
+			for(int i = 0; i < graph.elementAt(last).size(); i++) {
+				if(hasNotVisited(graph.elementAt(last).elementAt(i), path)) {
+					Vector<Integer> newPath = new Vector(path);
+					newPath.add(graph.elementAt(last).elementAt(i));
+					queue.add(newPath);
+				}
+			}
+		}
+	}
+}

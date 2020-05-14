@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class InsertAndDelete<T extends Comparable<T>> {
+	private ArrayList<T> items;
+	public InsertAndDelete() {
+		items = new ArrayList<T>();
+	}
+	
+	private void siftUp() {
+		int lastValue = items.size() - 1;
+		while(lastValue > 0) {
+			int parentValue = (lastValue - 1)/2; // does not matter - 1 or 2 when sifting up 
+			// because the value will round down anyways to the parent node
+			T current = items.get(lastValue);
+			T parent = items.get(parentValue);
+			if(current.compareTo(parent) > 0) {
+				// cur < par = -1; == : 0; > : 1
+				items.set(parentValue, current);
+				items.set(lastValue, parent);
+				
+				// move up 
+				lastValue = parentValue;
+			}else {
+				return;
+			}
+		}
+	}
+	
+	public void insert(T item) {
+		items.add(item);
+		siftUp();
+	}
+	
+	private void siftDown() {
+		int indexValue = 0; 
+		int leftChild = 1; 
+		while(leftChild < items.size()) {
+			int max = leftChild, rightChild = leftChild + 1;
+			if(rightChild < items.size()) { // if there is right child
+				if(items.get(rightChild).compareTo(items.get(leftChild)) > 0)){
+					// right > left -> max = rightChild
+					max++;
+				}
+			}
+			if(items.get(indexValue).compareTo(items.get(max)) < 0) {
+				// if the curr < max then swap
+				items.set(indexValue, items.get(max));
+				items.set(max, items.get(indexValue));
+			}
+		}
+	}
+}

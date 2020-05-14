@@ -1,0 +1,33 @@
+import java.util.*;
+public class SumOfSmallest {
+	Node root;
+	
+	class Node{
+		int data;
+		Node right;
+		Node left;
+		
+		Node(int data){
+			this.data = data;
+			right = null;
+			left = null;
+		}
+	}
+	
+	void insert (int data) {
+		
+	}
+	
+	Node insertUtil(Node root, int data) {
+		if(root == null) {
+			root = new Node(data);
+			return root;
+		}
+		if(data < root.data) {
+			root.left = insertUtil(root.left, data);
+		}else {
+			root.right = insertUtil(root.right, data);
+		}
+		return root;
+	}
+}

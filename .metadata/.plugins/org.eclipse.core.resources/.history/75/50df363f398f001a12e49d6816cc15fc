@@ -1,0 +1,110 @@
+import java.util.*;
+
+public class RemoveKeyOutOfRange {
+	Node root;
+	Queue <Integer> queue = new LinkedList<>();
+	
+	class Node{
+		int data;
+		Node right;
+		Node left;
+		
+		Node(int data){
+			this.data = data;
+			right = null;
+			left = null;
+		}
+	}
+	
+	void insert (int data) {
+		root = insertUtil(root, data);
+	}
+	
+	void delete(int data) {
+		root = deleteUtil(root, data);
+	}
+	
+	Node insertUtil(Node root, int data) {
+		if(root == null) {
+			root = new Node(data);
+			return root;
+		}
+		if(data < root.data) {
+			root.left = insertUtil(root.left, data);
+		}else {
+			root.right = insertUtil(root.right, data);
+		}
+		return root;
+	}
+	
+	Node deleteUtil(Node root, int data) {
+		if((root.data == data) && (root.left == null) && (root.right == null)) {
+			root = null;
+		}else if (root.data == data){
+			if(root.left == null) {
+				root.data = root.right.data;
+				root.right = null;
+			}else if(root.right == null){
+				root.data = root.left.data;
+				root.left = null;
+			}else {
+				Node temp = root.right;
+				while(temp.left != null) {
+					temp = temp.left;
+				}
+				root = deleteUtil(root, temp.data);
+				root.data = temp.data;
+				temp = null;
+			}
+		}else {
+			if(data < root.data) {
+				root.left = deleteUtil(root.left, data);
+			}else if(data > root.data) {
+				root.right = deleteUtil(root.right, data);
+			}
+		}
+		return root;
+	}
+	
+	void inorderSearch(Node root) {
+		if(root.left != null) inorderSearch(root.left);
+		System.out.print(root.data + " ");
+		if(root.right != null) inorderSearch(root.right);
+	}
+	
+	void deleteWithRange(int min, int max) {
+		deleteWithRangeUtil(root, min, max);
+		while(!queue.isEmpty()) {
+			delete(queue.poll());
+		}
+	}
+	
+	void deleteWithRangeUtil(Node root, int min, int max) {
+		if(root.left != null) deleteWithRangeUtil(root.left, min, max);
+		if((root.data <= min) && (root.data >= max)) queue.add(root.data);
+		if(root.right != null) deleteWithRangeUtil(root.right, min, max);
+	}		
+
+	
+	public static void main(String args[]) {
+		RemoveKeyOutOfRange obj = new RemoveKeyOutOfRange();
+		
+		obj.insert(6);
+		obj.insert(-13);
+		obj.insert(14);
+		obj.insert(13);
+		obj.insert(15);
+		obj.insert(7);
+		obj.insert(-8);
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter min: ");
+		int min = input.nextInt();
+		System.out.println("Enter max: ");
+		int max = input.nextInt();
+		
+		obj.deleteWithRange(min, max);
+		obj.inorderSearch(obj.root);
+		
+	}
+}

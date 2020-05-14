@@ -1,0 +1,47 @@
+import java.util.*;
+
+class GraphWithList {
+	private int numOfVertices; 
+	private LinkedList<Integer> listOfVertices[];
+	
+	GraphWithList(int vertices){
+		numOfVertices = vertices; 
+		listOfVertices = new LinkedList[vertices];
+		for(int i = 0; i < vertices; i++) {
+			listOfVertices[i] = new LinkedList();
+		}
+	}
+	
+	// adding edges into the graph
+	void addEdge(int src, int dest) {
+		listOfVertices[src].add(dest);
+	}
+	
+	void BFS(int src) {
+		boolean visited[] = new boolean[numOfVertices];
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+		
+		// mark the current node as visited and enqueue it
+		visited[src] = true;
+		queue.add(src);
+		
+		while(queue.size() != 0) {
+			// retrieve and remove the head
+			src = queue.poll();
+			System.out.print(src + " ");
+			
+			// getting all adjacent vertices to the src after dequeue the src
+			// if the adjacent vertex has not been visisted, then mark true and enque it
+			Iterator<Integer> i = listOfVertices[src].listIterator();
+			while(i.hasNext()) {
+				int n = i.next();
+				if(!visited[n]) {
+					
+				}
+			}
+		}
+	}
+}
+public class BreadthFirstSearch {
+	
+}
